@@ -318,13 +318,31 @@ document.getElementById('back').addEventListener('click', () => {
   window.scrollTo(0,0);
 });
 
-const popup=document.getElementById('popup');
-document.querySelectorAll('.gift').forEach(gift=>{
-  gift.addEventListener('click',()=>{
-    document.getElementById('popTitle').textContent=gift.dataset.title+' 🎁';
-    document.getElementById('popText').textContent=gift.dataset.text;
+const popup = document.getElementById('popup');
+
+document.querySelectorAll('.gift').forEach(gift => {
+  gift.addEventListener('click', () => {
+
+    document.getElementById('popTitle').textContent =
+      gift.dataset.title + ' 🎁';
+
+    if (gift.dataset.title === 'Gift 1') {
+      document.getElementById('popText').innerHTML = `
+        <iframe
+          src="https://drive.google.com/file/d/1VD4bBzU-ASqPC3BCmLgbnD8HwT0WIEb5/preview"
+          width="100%"
+          height="400"
+          allow="autoplay">
+        </iframe>
+      `;
+    } else {
+      document.getElementById('popText').textContent =
+        gift.dataset.text;
+    }
+
     popup.classList.add('show');
   });
+});
 });
 document.getElementById('close').addEventListener('click',()=>popup.classList.remove('show'));
 popup.addEventListener('click',e=>{if(e.target===popup)popup.classList.remove('show')});
